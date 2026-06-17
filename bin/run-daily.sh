@@ -12,10 +12,13 @@ log() { echo "[$(date '+%Y-%m-%d %H:%M:%S')] $*" | tee -a "$PIPELINE_LOG"; }
 
 log "====== Daily pipeline start ======"
 
-log "Step 1/2: collect"
+log "Step 1/3: collect"
 bash "$SCRIPT_DIR/collect.sh" "$DATE" && log "collect: OK" || { log "collect: FAILED"; exit 1; }
 
-log "Step 2/2: process"
+log "Step 2/3: process"
 bash "$SCRIPT_DIR/process.sh" "$DATE" && log "process: OK" || { log "process: FAILED"; exit 1; }
+
+log "Step 3/3: remediate"
+bash "$SCRIPT_DIR/remediate.sh" "$DATE" && log "remediate: OK" || { log "remediate: FAILED"; exit 1; }
 
 log "====== Pipeline complete. Reports at data/processed/$DATE/ ======"

@@ -11,6 +11,7 @@
     --border: #2e3147;
     --accent: #4f6ef7;
     --red: #e05c5c;
+    --orange: #e08a3c;
     --yellow: #d4a017;
     --green: #4caf7d;
     --blue: #4f9ef7;
@@ -25,131 +26,131 @@
   header {
     background: var(--surface);
     border-bottom: 1px solid var(--border);
-    padding: 14px 24px;
+    padding: 12px 20px;
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 12px;
+    flex-wrap: wrap;
   }
-  header h1 { font-size: 1.1rem; font-weight: 600; letter-spacing: .02em; }
-  header .badge { background: var(--accent); color: #fff; font-size: .7rem; padding: 2px 8px; border-radius: 12px; font-weight: 600; }
-
-  .layout { display: flex; height: calc(100vh - 53px); }
-
-  /* ── Sidebar ── */
-  .sidebar {
-    width: 220px;
-    min-width: 220px;
-    background: var(--surface);
-    border-right: 1px solid var(--border);
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
-  }
-  .sidebar-section { padding: 12px 16px 4px; font-size: .7rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
-  .sidebar a {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 16px;
-    font-size: .85rem;
-    color: var(--text);
-    text-decoration: none;
-    border-left: 3px solid transparent;
-    transition: background .15s;
-  }
-  .sidebar a:hover { background: rgba(79,110,247,.08); }
-  .sidebar a.active { border-left-color: var(--accent); background: rgba(79,110,247,.12); color: #fff; }
-  .sidebar a .dot {
-    width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
-  }
-  .dot-errors   { background: var(--red); }
-  .dot-warnings { background: var(--yellow); }
-  .dot-auth     { background: var(--purple); }
-  .dot-web      { background: var(--blue); }
-  .dot-app      { background: var(--green); }
-  .dot-summary  { background: var(--accent); }
-  .sidebar a .count { margin-left: auto; font-size: .72rem; color: var(--muted); }
-
-  .date-select { padding: 10px 12px; border-top: 1px solid var(--border); margin-top: auto; }
-  .date-select select {
-    width: 100%;
+  header h1 { font-size: 1rem; font-weight: 600; letter-spacing: .02em; flex-shrink: 0; }
+  .badge { background: var(--accent); color: #fff; font-size: .68rem; padding: 2px 7px; border-radius: 10px; font-weight: 600; }
+  .header-controls { display: flex; gap: 8px; margin-left: auto; align-items: center; }
+  .ctrl-label { font-size: .75rem; color: var(--muted); }
+  select.ctrl {
     background: var(--bg);
     color: var(--text);
     border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 6px 8px;
-    font-size: .82rem;
+    border-radius: 5px;
+    padding: 4px 8px;
+    font-size: .8rem;
     cursor: pointer;
   }
-  .date-select select:focus { outline: none; border-color: var(--accent); }
+  select.ctrl:focus { outline: none; border-color: var(--accent); }
+
+  .layout { display: flex; height: calc(100vh - 49px); }
+
+  /* ── Sidebar ── */
+  .sidebar {
+    width: 200px; min-width: 200px;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    display: flex; flex-direction: column;
+    overflow-y: auto;
+  }
+  .sidebar-section { padding: 10px 14px 3px; font-size: .68rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
+  .sidebar a {
+    display: flex; align-items: center; gap: 7px;
+    padding: 7px 14px;
+    font-size: .83rem; color: var(--text); text-decoration: none;
+    border-left: 3px solid transparent;
+    transition: background .12s;
+  }
+  .sidebar a:hover { background: rgba(79,110,247,.07); }
+  .sidebar a.active { border-left-color: var(--accent); background: rgba(79,110,247,.12); color: #fff; }
+  .sidebar a .dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+  .dot-errors      { background: var(--red); }
+  .dot-warnings    { background: var(--yellow); }
+  .dot-auth        { background: var(--purple); }
+  .dot-web         { background: var(--blue); }
+  .dot-app         { background: var(--green); }
+  .dot-summary     { background: var(--accent); }
+  .dot-remediation { background: var(--orange); }
+  .sidebar a .count { margin-left: auto; font-size: .7rem; color: var(--muted); }
+
+  /* ── Host filter pills ── */
+  .host-pills { padding: 8px 14px; border-top: 1px solid var(--border); }
+  .host-pills .pill-label { font-size: .68rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 5px; }
+  .pill-list { display: flex; flex-wrap: wrap; gap: 5px; }
+  .pill {
+    font-size: .72rem; padding: 3px 9px; border-radius: 10px;
+    text-decoration: none; border: 1px solid var(--border);
+    color: var(--muted); transition: all .12s;
+  }
+  .pill:hover { border-color: var(--accent); color: var(--text); }
+  .pill.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .pill.host-voltron { --hc: #4f9ef7; }
+  .pill.host-tekaden { --hc: #4caf7d; }
+  .pill.host-zura    { --hc: #9b72cf; }
+  .pill.active.host-voltron { background: var(--hc); border-color: var(--hc); }
+  .pill.active.host-tekaden { background: var(--hc); border-color: var(--hc); }
+  .pill.active.host-zura    { background: var(--hc); border-color: var(--hc); }
 
   /* ── Main ── */
   .main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
 
   .toolbar {
-    background: var(--surface);
-    border-bottom: 1px solid var(--border);
-    padding: 10px 20px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-size: .82rem;
-    color: var(--muted);
+    background: var(--surface); border-bottom: 1px solid var(--border);
+    padding: 8px 18px; display: flex; align-items: center; gap: 10px;
+    font-size: .8rem; color: var(--muted);
   }
   .toolbar strong { color: var(--text); }
+  .host-badge {
+    font-size: .7rem; padding: 2px 8px; border-radius: 10px;
+    font-weight: 600; background: rgba(79,110,247,.15); color: var(--accent);
+  }
 
-  /* stat cards */
-  .stats { display: flex; gap: 10px; padding: 16px 20px; flex-wrap: wrap; }
+  /* Stat cards */
+  .stats { display: flex; gap: 8px; padding: 12px 18px; flex-wrap: wrap; }
   .stat-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 12px 18px;
-    min-width: 120px;
-    flex: 1;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 7px; padding: 10px 16px; min-width: 100px; flex: 1;
   }
-  .stat-card .label { font-size: .7rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 4px; }
-  .stat-card .value { font-size: 1.5rem; font-weight: 700; }
-  .stat-errors   .value { color: var(--red); }
-  .stat-warnings .value { color: var(--yellow); }
-  .stat-auth     .value { color: var(--purple); }
-  .stat-web      .value { color: var(--blue); }
-  .stat-app      .value { color: var(--green); }
+  .stat-card .label { font-size: .67rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 3px; }
+  .stat-card .value { font-size: 1.4rem; font-weight: 700; }
+  .stat-errors      .value { color: var(--red); }
+  .stat-warnings    .value { color: var(--yellow); }
+  .stat-auth        .value { color: var(--purple); }
+  .stat-web         .value { color: var(--blue); }
+  .stat-app         .value { color: var(--green); }
 
-  /* log viewer */
-  .log-wrap { flex: 1; overflow-y: auto; padding: 0 20px 20px; }
-  .log-viewer {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    overflow: hidden;
+  /* Remediation severity cards */
+  .rem-cards { display: flex; gap: 8px; padding: 0 18px 12px; flex-wrap: wrap; }
+  .rem-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 7px; padding: 8px 14px; flex: 1; min-width: 80px;
   }
+  .rem-card .label { font-size: .67rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 3px; }
+  .rem-card .value { font-size: 1.2rem; font-weight: 700; }
+  .rem-CRITICAL .value { color: var(--red); }
+  .rem-HIGH     .value { color: var(--orange); }
+  .rem-MEDIUM   .value { color: var(--yellow); }
+  .rem-LOW      .value { color: var(--green); }
+
+  /* Log viewer */
+  .log-wrap { flex: 1; overflow-y: auto; padding: 0 18px 18px; }
+  .log-viewer { background: var(--surface); border: 1px solid var(--border); border-radius: 7px; overflow: hidden; }
   .log-header {
-    padding: 10px 16px;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: .8rem;
-    color: var(--muted);
+    padding: 8px 14px; border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: .78rem; color: var(--muted);
   }
   pre {
-    font-family: var(--mono);
-    font-size: .78rem;
-    line-height: 1.6;
-    padding: 16px;
-    white-space: pre-wrap;
-    word-break: break-word;
-    color: #c8cfe8;
-    max-height: calc(100vh - 260px);
-    overflow-y: auto;
+    font-family: var(--mono); font-size: .76rem; line-height: 1.6;
+    padding: 14px; white-space: pre-wrap; word-break: break-word; color: #c8cfe8;
+    max-height: calc(100vh - 240px); overflow-y: auto;
   }
-  pre .hl-error   { color: var(--red); }
-  pre .hl-warn    { color: var(--yellow); }
-  pre .hl-ok      { color: var(--green); }
-  pre .hl-section { color: var(--accent); font-weight: bold; }
 
-  .empty { padding: 60px 20px; text-align: center; color: var(--muted); font-size: .9rem; }
+  .empty { padding: 50px 18px; text-align: center; color: var(--muted); font-size: .88rem; }
 </style>
 </head>
 <body>
@@ -157,7 +158,19 @@
 <header>
   <h1>Log Audit Portal</h1>
   <span class="badge">DAILY</span>
-  {% if selected %}<span style="color:var(--muted);font-size:.85rem;">{{ selected }}</span>{% endif %}
+
+  <div class="header-controls">
+    <span class="ctrl-label">Date</span>
+    <form method="get" id="dateForm" style="display:inline">
+      <input type="hidden" name="cat" value="{{ active_cat }}">
+      <input type="hidden" name="host" value="{{ selected_host }}">
+      <select name="date" class="ctrl" onchange="document.getElementById('dateForm').submit()">
+        {% for d in dates %}
+        <option value="{{ d }}" {% if d == selected_date %}selected{% endif %}>{{ d }}</option>
+        {% endfor %}
+      </select>
+    </form>
+  </div>
 </header>
 
 <div class="layout">
@@ -165,14 +178,22 @@
   <!-- Sidebar -->
   <nav class="sidebar">
     <div class="sidebar-section">Views</div>
-
-    <a href="?date={{ selected }}&cat=summary" class="{% if active_cat == 'summary' %}active{% endif %}">
+    <a href="?date={{ selected_date }}&host={{ selected_host }}&cat=summary"
+       class="{% if active_cat == 'summary' %}active{% endif %}">
       <span class="dot dot-summary"></span> Summary
     </a>
+    <a href="?date={{ selected_date }}&host={{ selected_host }}&cat=remediation"
+       class="{% if active_cat == 'remediation' %}active{% endif %}">
+      <span class="dot dot-remediation"></span> Remediation
+      {% if remediation_counts.get('total') %}
+        <span class="count" style="color:#e08a3c">{{ remediation_counts['total'] }}</span>
+      {% endif %}
+    </a>
 
-    <div class="sidebar-section" style="margin-top:8px">Categories</div>
+    <div class="sidebar-section" style="margin-top:6px">Categories</div>
     {% for cat in categories %}
-    <a href="?date={{ selected }}&cat={{ cat }}" class="{% if active_cat == cat %}active{% endif %}">
+    <a href="?date={{ selected_date }}&host={{ selected_host }}&cat={{ cat }}"
+       class="{% if active_cat == cat %}active{% endif %}">
       <span class="dot dot-{{ cat }}"></span>
       {{ cat|capitalize }}
       {% if summary_stats.get(cat) %}
@@ -181,27 +202,34 @@
     </a>
     {% endfor %}
 
-    <div class="date-select">
-      <form method="get" id="dateForm">
-        <input type="hidden" name="cat" value="{{ active_cat }}">
-        <select name="date" onchange="document.getElementById('dateForm').submit()">
-          {% for d in dates %}
-          <option value="{{ d }}" {% if d == selected %}selected{% endif %}>{{ d }}</option>
-          {% endfor %}
-        </select>
-      </form>
+    <!-- Host filter -->
+    {% if hosts %}
+    <div class="host-pills">
+      <div class="pill-label">Hosts</div>
+      <div class="pill-list">
+        <a href="?date={{ selected_date }}&host=all&cat={{ active_cat }}"
+           class="pill {% if selected_host == 'all' %}active{% endif %}">All</a>
+        {% for h in hosts %}
+        <a href="?date={{ selected_date }}&host={{ h }}&cat={{ active_cat }}"
+           class="pill host-{{ h }} {% if selected_host == h %}active{% endif %}">{{ h }}</a>
+        {% endfor %}
+      </div>
     </div>
+    {% endif %}
+
   </nav>
 
-  <!-- Main -->
+  <!-- Main content -->
   <main class="main">
 
     <div class="toolbar">
-      Viewing <strong>{{ active_cat|upper }}</strong>
-      {% if selected %}&nbsp;·&nbsp; date: <strong>{{ selected }}</strong>{% endif %}
+      <strong>{{ active_cat|upper }}</strong>
+      &nbsp;·&nbsp;
+      <span class="host-badge">{{ selected_host if selected_host != 'all' else 'all hosts' }}</span>
+      &nbsp;·&nbsp; {{ selected_date }}
     </div>
 
-    <!-- Stat cards (only on summary view) -->
+    <!-- Stat cards (summary view) -->
     {% if active_cat == 'summary' and summary_stats %}
     <div class="stats">
       {% for cat in categories %}
@@ -215,19 +243,35 @@
     </div>
     {% endif %}
 
+    <!-- Remediation severity cards -->
+    {% if active_cat == 'remediation' and remediation_counts.get('total', 0) > 0 %}
+    <div class="rem-cards">
+      {% for sev in ['CRITICAL', 'HIGH', 'MEDIUM', 'LOW'] %}
+      <div class="rem-card rem-{{ sev }}">
+        <div class="label">{{ sev }}</div>
+        <div class="value">{{ remediation_counts.get(sev, 0) }}</div>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
     <div class="log-wrap">
       {% if content %}
       <div class="log-viewer">
         <div class="log-header">
-          <span>{{ active_cat }}.log</span>
+          <span>{{ active_cat }}.log
+            {% if selected_host != 'all' %} — {{ selected_host }}{% endif %}
+          </span>
           <span>{{ content.splitlines()|length }} lines</span>
         </div>
         <pre id="logContent">{{ content }}</pre>
       </div>
-      {% elif selected %}
-      <div class="empty">No data for <strong>{{ active_cat }}</strong> on {{ selected }}.<br>Run the daily pipeline to generate reports.</div>
+      {% elif selected_date %}
+      <div class="empty">No data for <strong>{{ active_cat }}</strong>
+        {% if selected_host != 'all' %} on host <strong>{{ selected_host }}</strong>{% endif %}
+        on {{ selected_date }}.</div>
       {% else %}
-      <div class="empty">No processed reports found.<br>Run <code>bin/run-daily.sh</code> to collect and process logs.</div>
+      <div class="empty">No processed reports found.<br>Run <code>bin/run-daily.sh</code> to generate reports.</div>
       {% endif %}
     </div>
 
@@ -235,17 +279,33 @@
 </div>
 
 <script>
-// Highlight key patterns in the log viewer
-(function() {
+(function () {
   const pre = document.getElementById('logContent');
   if (!pre) return;
   let html = pre.textContent
     .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-    .replace(/(### SOURCE:[^\n]+)/g, '<span class="hl-section">$1</span>')
-    .replace(/(={3,}[^\n]*={3,})/g, '<span class="hl-section">$1</span>')
-    .replace(/\b(error|fail(ed|ure)?|crit(ical)?|panic|emerg)\b/gi, '<span class="hl-error">$&</span>')
-    .replace(/\b(warn(ing)?|deprecated|timeout|refused|denied)\b/gi, '<span class="hl-warn">$&</span>')
-    .replace(/\b(OK|Accepted|opened|success)\b/gi, '<span class="hl-ok">$&</span>');
+    // Remediation severity headers
+    .replace(/(\[CRITICAL\])/g, '<span style="color:#e05c5c;font-weight:bold">$1</span>')
+    .replace(/(\[HIGH\])/g,     '<span style="color:#e08a3c;font-weight:bold">$1</span>')
+    .replace(/(\[MEDIUM\])/g,   '<span style="color:#d4a017;font-weight:bold">$1</span>')
+    .replace(/(\[LOW\])/g,      '<span style="color:#4caf7d;font-weight:bold">$1</span>')
+    // Box drawing (remediation blocks)
+    .replace(/(┌[─┐┘└│├┤]+)/g, '<span style="color:#4f6ef7">$1</span>')
+    .replace(/(└[─┐┘└│├┤]+)/g, '<span style="color:#4f6ef7">$1</span>')
+    .replace(/(├[─┐┘└│├┤]+)/g, '<span style="color:#2e3147">$1</span>')
+    .replace(/^(│)/gm,          '<span style="color:#2e3147">$1</span>')
+    // Section headers
+    .replace(/(={3,}[^\n]+={3,})/g, '<span style="color:#4f6ef7;font-weight:bold">$1</span>')
+    .replace(/(### [^\n]+###)/g,    '<span style="color:#4f6ef7">$1</span>')
+    // Error keywords
+    .replace(/\b(error|fail(?:ed|ure)?|critical|panic|emerg(?:ency)?|segfault)\b/gi,
+             '<span style="color:#e05c5c">$&</span>')
+    // Warning keywords
+    .replace(/\b(warn(?:ing)?|deprecated|timeout|refused|denied)\b/gi,
+             '<span style="color:#d4a017">$&</span>')
+    // OK keywords
+    .replace(/\b(OK|Accepted|success(?:ful)?|opened)\b/gi,
+             '<span style="color:#4caf7d">$&</span>');
   pre.innerHTML = html;
 })();
 </script>
