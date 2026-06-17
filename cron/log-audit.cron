@@ -1,0 +1,8 @@
+# Log Audit — daily cron job
+# Install with:  crontab -e  (paste the line below, adjusting the path)
+# Or:  sudo cp log-audit.cron /etc/cron.d/log-audit
+#
+# Runs at 00:05 every day (gives the system a moment after midnight rollover)
+# Logs pipeline output to data/pipeline-YYYY-MM-DD.log
+
+5 0 * * * root /home/ronin/projects/log-audit/bin/run-daily.sh >> /home/ronin/projects/log-audit/data/cron.log 2>&1

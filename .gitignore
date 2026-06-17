@@ -1,0 +1,12 @@
+# Runtime data
+data/
+
+# Python virtualenv
+.venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# OS
+.DS_Store

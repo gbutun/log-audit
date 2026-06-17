@@ -1,0 +1,5 @@
+flask>=3.0.0
+
+# Install into the project venv:
+#   python3 -m venv .venv
+#   .venv/bin/pip install -r web/requirements.txt
