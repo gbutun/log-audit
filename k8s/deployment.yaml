@@ -13,6 +13,8 @@ spec:
       labels:
         app: log-audit-portal
     spec:
+      imagePullSecrets:
+        - name: ghcr-pull-secret
       containers:
         - name: portal
           image: ghcr.io/gbutun/log-audit:latest
