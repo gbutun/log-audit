@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: log-audit
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/gbutun/log-audit.git
+    targetRevision: master
+    path: k8s
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: log-audit
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

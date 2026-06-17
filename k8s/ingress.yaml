@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: log-audit
+  namespace: log-audit
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: HTTP
+spec:
+  ingressClassName: public
+  rules:
+    - host: log-audit.kenshin.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: log-audit-portal
+                port:
+                  number: 5055
+  tls:
+    - hosts:
+        - log-audit.kenshin.local
+      secretName: kenshin-wildcard-tls

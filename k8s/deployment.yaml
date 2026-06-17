@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: log-audit-portal
+  namespace: log-audit
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: log-audit-portal
+  template:
+    metadata:
+      labels:
+        app: log-audit-portal
+    spec:
+      containers:
+        - name: portal
+          image: ghcr.io/gbutun/log-audit:latest
+          command: ["python", "web/app.py"]
+          ports:
+            - containerPort: 5055
+          volumeMounts:
+            - name: data
+              mountPath: /app/data
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: log-audit-data

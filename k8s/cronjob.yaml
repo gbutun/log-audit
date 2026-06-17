@@ -1,0 +1,36 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: log-audit-pipeline
+  namespace: log-audit
+spec:
+  schedule: "5 0 * * *"
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+            - name: pipeline
+              image: ghcr.io/gbutun/log-audit:latest
+              command: ["bash", "bin/run-daily.sh"]
+              volumeMounts:
+                - name: data
+                  mountPath: /app/data
+                - name: host-varlog
+                  mountPath: /var/log
+                  readOnly: true
+                - name: host-remote-logs
+                  mountPath: /var/log/remote
+                  readOnly: true
+          volumes:
+            - name: data
+              persistentVolumeClaim:
+                claimName: log-audit-data
+            - name: host-varlog
+              hostPath:
+                path: /var/log
+            - name: host-remote-logs
+              hostPath:
+                path: /var/log/remote
